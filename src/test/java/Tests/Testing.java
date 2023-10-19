@@ -3,7 +3,7 @@ package Tests;
 import Base.BaseTest;
 import org.testng.annotations.BeforeMethod;
 
-public class Test2 extends BaseTest {
+public class Testing extends BaseTest {
 
 
     @BeforeMethod

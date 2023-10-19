@@ -126,11 +126,6 @@ public class CheckoutTests extends BaseTest {
         checkoutPage1.inputpostalCode("C");
 
         Assert.assertFalse(checkoutPage1.continueButton.isEnabled());
-        
+        //Fails, user should not be able to continue
 
-
-    }
-
-
-
-}
+    }}

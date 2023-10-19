@@ -52,7 +52,14 @@ public class BaseTest {
     public static String productOneDetailsURL =  baseURL+"inventory-item.html?id=4";
 
 
+    //Sorting options
 
+    public static String priceLoHi = "Price (low to high)";
+    public static String priceHiLo = "Price (high to low)";
+
+    public static String nameAtoZ = "Name (A to Z)";
+
+    public static String nameZtoA = "Name (Z to A)";
 
 
     //Other data

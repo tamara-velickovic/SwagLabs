@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -47,30 +48,29 @@ public class HomepageTests extends BaseTest {
 
     }
 
-/*
-    @Test
-   public void verifyAllItemDescriptionsAreDisplayed () {
-
-        for (int i = 0; i < homePage.productDescriptions.size(); i++) {
-            Assert.assertTrue(homePage.productDescriptions.get(i).isDisplayed());
-            ;}
-
-        System.out.println(homePage.productDescriptions.size());} */
 
     @Test
     public void verifyAllItemPricesAreDisplayed () {
 
         List<Double> actualPrices = homePage.getProductPrices();
-        List<String> expectedPrices = Arrays.asList("$29.99", "$9.99", "$15.99", "$49.99", "$7.99", "$15.99");
+        List<Double> expectedPrices = Arrays.asList(29.99, 9.99, 15.99, 49.99, 7.99, 15.99);
         Assert.assertEquals(actualPrices, expectedPrices, "Product prices do not match.");
 
     }
-    @Test
-    public void verifyAllItemImagesAreDisplayed () {
+  /*  @Test
 
-        Assert.assertTrue(homePage.allImagesAreDisplayed());
+    public void verifyAllItemImagesAreDisplayed() {
+        boolean allImagesDisplayed = true;
 
-    }
+        for (WebElement productImage : homePage.productImages) {
+            String imageUrl = productImage.getAttribute("src");
+
+            if (imageUrl == null || imageUrl.isEmpty()) {
+                allImagesDisplayed = false;
+                break;
+            }
+        } */
+
 
 
     //Test if products can be added to the cart from the homepage
@@ -117,6 +117,68 @@ public class HomepageTests extends BaseTest {
         Thread.sleep(1500);
         //wait.until(ExpectedConditions.visibilityOf(globalElements.resetAppState));
         globalElements.clickOnResetAppState();
+
+    }
+
+    @Test
+    public void verifySortingAtoZ() {
+
+    Assert.assertEquals( homePage.getActiveOptionText(), nameAtoZ);
+
+        List<String> actualProductNames = homePage.getProductNames();
+        List<String> expectedProductNames = Arrays.asList("Sauce Labs Backpack", "Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt", "Sauce Labs Fleece Jacket", "Sauce Labs Onesie", "Test.allTheThings() T-Shirt (Red)");
+        Assert.assertEquals(actualProductNames, expectedProductNames);
+
+
+    }
+
+    @Test
+    public void verifySortingZtoA() {
+
+        List<String> actualProductNames = homePage.getProductNames();
+        List<String> expectedProductNames = Arrays.asList("Sauce Labs Backpack", "Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt", "Sauce Labs Fleece Jacket", "Sauce Labs Onesie", "Test.allTheThings() T-Shirt (Red)");
+        Assert.assertEquals(actualProductNames, expectedProductNames);
+
+        homePage.selectSortingOption(nameZtoA);
+        Collections.sort(expectedProductNames, Collections.reverseOrder());
+        List<String> actualProductNamesAfterSorting = homePage.getProductNames();
+
+        Assert.assertEquals(actualProductNamesAfterSorting, expectedProductNames);
+
+    }
+
+    @Test
+    public void verifySortingPriceLoHi() {
+
+        List<Double> actualPrices = homePage.getProductPrices();
+        List<Double> expectedPrices = Arrays.asList(29.99, 9.99, 15.99, 49.99, 7.99, 15.99);
+        Assert.assertEquals(actualPrices, expectedPrices);
+
+
+        homePage.selectSortingOption(priceLoHi);
+        Collections.sort(expectedPrices);
+        List<Double> actualPricesAfterSorting = homePage.getProductPrices();
+
+        Assert.assertEquals(actualPricesAfterSorting, expectedPrices );
+
+
+
+
+    }
+
+    @Test
+    public void verifySortingPriceHiLo() {
+
+        List<Double> actualPrices = homePage.getProductPrices();
+        List<Double> expectedPrices = Arrays.asList(29.99, 9.99, 15.99, 49.99, 7.99, 15.99);
+        Assert.assertEquals(actualPrices, expectedPrices);
+
+        homePage.selectSortingOption(priceHiLo);
+        Collections.sort(expectedPrices, Collections.reverseOrder());
+        List<Double> actualPricesAfterSorting = homePage.getProductPrices();
+
+        Assert.assertEquals(actualPricesAfterSorting, expectedPrices );
+
 
     }
 

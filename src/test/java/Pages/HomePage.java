@@ -21,6 +21,11 @@ public class HomePage extends BaseTest {
  @FindBy(className = "product_sort_container")
  public WebElement sortDropDown;
 
+ @FindBy(className = "active_option")
+ public WebElement activeOption;
+
+
+
  @FindBy(css = ".btn.btn_primary.btn_small.btn_inventory")
  public List<WebElement> addButtons;
 
@@ -76,11 +81,11 @@ public class HomePage extends BaseTest {
 
  //Products methods
 
- public void clickOnProductName(int index) {
+ public void clickOnProductName(String name) {
   for (int i = 0; i < productsNames.size(); i++) {
-   if (index == i) {
-    productsNames.get(i).click();
-    break;
+   if (productsNames.get(i).getText() == name) {
+       productsNames.get(i).click();
+       break;
    }
   }
  }
@@ -163,6 +168,10 @@ public class HomePage extends BaseTest {
     break;}}}
 
 
+public String getActiveOptionText () {
 
+ return activeOption.getText();
+
+}
 
 }

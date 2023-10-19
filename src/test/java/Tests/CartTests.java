@@ -96,7 +96,6 @@ public class CartTests extends BaseTest {
         Assert.assertTrue(cartPage.cartItems.isEmpty());
 
         Assert.assertFalse(cartPage.checkoutButton.isEnabled());
-
         //Fails, because user should not be able to proceed with an empty cart
 
         //cartPage.clickOnCheckoutButton();
